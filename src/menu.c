@@ -22,9 +22,11 @@ bool button(int x, int y, int width, int height){
 
 int timeSinceBanner = 0;
 Texture2D tank;
+Texture2D logo;
 
 void menuInit() {
 	tank = LoadTexture("/res/game_Icon.png");
+	logo = LoadTexture("/res/Play_CG_Purple.png");
 }
 
 void menuUpdate() {
@@ -50,6 +52,7 @@ void menuUpdate() {
 	
 
 	DrawTextureEx(tank, (Vector2){500, 240}, 0, 0.3, WHITE);
+	DrawTextureEx(logo, (Vector2){100, 440}, 0, 1, WHITE);
 	updateMouse(true);
 }
 
