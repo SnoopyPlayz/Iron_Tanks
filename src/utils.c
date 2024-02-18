@@ -126,7 +126,6 @@ void stopGame(){
 void winLevel(){
 	currentLevel++;
 	char storeLevel[80];
-	printf("current levlel: %d \n", currentLevel);
 	sprintf(storeLevel, "storeData(%d)", currentLevel);
 	funcJS(storeLevel);
 	
