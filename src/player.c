@@ -57,7 +57,7 @@ void renderPlayer(){
 	float posY = playerY - camera.target.y;
 	//head rot
 	
-	headRot = pointsToDeg(mouseX - camera.target.x, mouseY - camera.target.y, posX, posY);
+	headRot = pointsToDeg(mouseX + 80, mouseY + 50, posX, posY);
 
 	//head render
 	DrawTextureWithRot(playerHead, playerX + 4, playerY + 4, headRot, GRAY);

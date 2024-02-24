@@ -1,1 +1,163 @@
-<!doctypehtml><html lang=EN-us><head><meta charset=utf-8><meta content="text/html; charset=utf-8"http-equiv=Content-Type><script src=https://sdk.crazygames.com/crazygames-sdk-v2.js></script><style>body{background-color:#828282;font-family:arial;margin:0;padding:none;overflow:hidden}.emscripten{padding-right:0;margin-left:auto;margin-right:auto;display:block}div.emscripten{text-align:center}div.emscripten_border{border:1px solid #000}canvas.emscripten{border:0 none;background:#000;width:100%}.spinner{height:30px;width:30px;margin:0;margin-top:20px;margin-left:20px;display:inline-block;vertical-align:top;-webkit-animation:rotation .8s linear infinite;-moz-animation:rotation .8s linear infinite;-o-animation:rotation .8s linear infinite;animation:rotation .8s linear infinite;border-left:5px solid #000;border-right:5px solid #000;border-bottom:5px solid #000;border-top:5px solid red;border-radius:100%;background-color:#f5f5f5}@-webkit-keyframes rotation{from{-webkit-transform:rotate(0)}to{-webkit-transform:rotate(360deg)}}@-moz-keyframes rotation{from{-moz-transform:rotate(0)}to{-moz-transform:rotate(360deg)}}@-o-keyframes rotation{from{-o-transform:rotate(0)}to{-o-transform:rotate(360deg)}}@keyframes rotation{from{transform:rotate(0)}to{transform:rotate(360deg)}}#status{vertical-align:top;margin-left:20px;font-weight:700;color:#282828}#progress{height:0;width:0}#output{width:100%;height:140px;margin:0 auto;margin-top:10px;display:block;background-color:#000;color:#25ae26;font-family:'Lucida Console',Monaco,monospace;outline:0}#banner-container{top:200px;left:600px;position:absolute}#banner-container2{top:5px;left:140px;position:absolute}input[type=button]:hover{background-color:#f5f5f5ff;border-color:#000}</style></head><script></script><body><div id=header><div id=banner-container style=width:300px;height:250px></div><div id=banner-container2 style=width:728px;height:90px></div></div><span><input id=btn-audio onclick=toggleAudio() type=button value="🔇 MUTE AUDIO"></span><div id=spinner class=spinner></div><div id=status class=emscripten>Downloading...</div><div class=emscripten><progress hidden id=progress max=100 value=0></progress></div><div class=emscripten_border><canvas class=emscripten id=canvas oncontextmenu=event.preventDefault() tabindex=-1></canvas></div><script>window.addEventListener("wheel",(e=>e.preventDefault()),{passive:!1}),window.addEventListener("keydown",(e=>{["ArrowUp","ArrowDown"," "].includes(e.key)&&e.preventDefault()}))</script><script src=https://cdn.jsdelivr.net/gh/eligrey/FileSaver.js/dist/FileSaver.min.js></script><script>function saveFileFromMEMFSToDisk(e,a){var i,o=FS.readFile(e);i=new Blob([o.buffer],{type:"application/octet-binary"}),saveAs(i,a)}</script><script>var statusElement=document.querySelector("#status"),progressElement=document.querySelector("#progress"),spinnerElement=document.querySelector("#spinner"),Module={preRun:[],postRun:[],print:function(){var e=document.querySelector("#output");return e&&(e.value=""),function(t){arguments.length>1&&(t=Array.prototype.slice.call(arguments).join(" ")),console.log(t),e&&(e.value+=t+"\n",e.scrollTop=e.scrollHeight)}}(),printErr:function(e){arguments.length>1&&(e=Array.prototype.slice.call(arguments).join(" ")),console.error(e)},canvas:function(){var e=document.querySelector("#canvas");return e.addEventListener("webglcontextlost",(function(e){alert("WebGL context lost. You will need to reload the page."),e.preventDefault()}),!1),e}(),setStatus:function(e){if(Module.setStatus.last||(Module.setStatus.last={time:Date.now(),text:""}),e!==Module.setStatus.last.text){var t=e.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/),n=Date.now();t&&n-Module.setStatus.last.time<30||(Module.setStatus.last.time=n,Module.setStatus.last.text=e,t?(e=t[1],progressElement.value=100*parseInt(t[2]),progressElement.max=100*parseInt(t[4]),progressElement.hidden=!0,spinnerElement.hidden=!1):(progressElement.value=null,progressElement.max=null,progressElement.hidden=!0,e||(spinnerElement.style.display="none")),statusElement.innerHTML=e)}},totalDependencies:0,monitorRunDependencies:function(e){this.totalDependencies=Math.max(this.totalDependencies,e),Module.setStatus(e?"Preparing... ("+(this.totalDependencies-e)+"/"+this.totalDependencies+")":"All downloads complete.")}};Module.setStatus("Downloading..."),window.onerror=function(){spinnerElement.style.display="none",Module.setStatus=function(e){e&&Module.printErr("[post-exception status] "+e)}}</script><script>var audioBtn=document.querySelector("#btn-audio");const audioContexList=[];function toggleAudio(){var t=!1;audioContexList.forEach((e=>{"suspended"==e.state?(e.resume(),t=!0):"running"==e.state&&e.suspend()})),audioBtn.value=t?"🔇 MUTE AUDIO":"🔈 RESUME AUDIO"}self.AudioContext=new Proxy(self.AudioContext,{construct(t,e){const n=new t(...e);return audioContexList.push(n),"suspended"==n.state&&(audioBtn.value="🔈 MUTE AUDIO"),n}})</script><script>function happyTime(){window.CrazyGames.SDK.game.happytime()}function storeData(e){localStorage.setItem("IRONTANKS_LEVEL",e)}function loadData(){return localStorage.getItem("IRONTANKS_LEVEL")}function startLoadingGame(){window.CrazyGames.SDK.game.sdkGameLoadingStart()}function stopLoadingGame(){window.CrazyGames.SDK.game.sdkGameLoadingStop()}function startGamePlay(){window.CrazyGames.SDK.game.gameplayStart()}function stopGamePlay(){window.CrazyGames.SDK.game.gameplayStop()}function displayAD(){document.getElementById("banner-container").style.display="block",document.getElementById("banner-container2").style.display="block",window.CrazyGames.SDK.banner.requestBanner({id:"banner-container2",width:728,height:90}),window.CrazyGames.SDK.banner.requestBanner({id:"banner-container",width:300,height:250})}function clearAD(){document.getElementById("banner-container").style.display="none",document.getElementById("banner-container2").style.display="none",window.CrazyGames.SDK.banner.clearAllBanners()}</script><script src=index.js async></script></body></html>
+<!doctype html>
+<html lang="EN-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="https://sdk.crazygames.com/crazygames-sdk-v2.js"></script>
+
+    <title>Iron Tanks</title>
+
+    <meta name="title" content="raylib web game">
+    <meta name="description" content="New raylib web videogame, developed using raylib videogames library">
+    <meta name="keywords" content="raylib, programming, examples, html5, C, C++, library, learn, games, videogames">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Open Graph metatags for sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Iron Tanks">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://www.raylib.com/common/raylib_logo.png">
+    <meta property="og:image:alt" content="New raylib web videogame, developed using raylib videogames library" />
+    <meta property="og:site_name" content="raylib - example">
+    <meta property="og:url" content="https://www.raylib.com/games.html">
+    <meta property="og:description" content="New raylib web videogame, developed using raylib videogames library">
+
+    <!-- Twitter metatags for sharing -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@raysan5">
+    <meta name="twitter:title" content="raylib web game">
+    <meta name="twitter:image" content="https://www.raylib.com/common/raylib_logo.png">
+    <meta name="twitter:image:alt" content="New raylib web videogame, developed using raylib videogames library">
+    <meta name="twitter:url" content="https://www.raylib.com/games.html">
+    <meta name="twitter:description" content="New raylib web videogame, developed using raylib videogames library">
+
+	<div id="banner-container" style="width: 300px; height: 250px"></div>
+	<div id="banner-container2" style="width: 728px; height: 90px"></div>
+
+    <!-- Favicon -->
+
+    <style>
+        body { margin: 0px;  overflow-y: hidden; 
+  				overflow-x: hidden; }
+        canvas.emscripten { border: 0px none; background-color: black; }
+
+      #banner-container {
+	      top: 100px;
+	      left: 600px;
+	      position: absolute;
+	      display: none;
+      }
+
+      #banner-container2 {
+	      top: 1px;
+	      left: 160px;
+	      position: absolute;
+	      display: none;
+      }
+
+    </style>
+    <script type='text/javascript' src="https://cdn.jsdelivr.net/gh/eligrey/FileSaver.js/dist/FileSaver.min.js"> </script>
+    <script type='text/javascript'>
+        function saveFileFromMEMFSToDisk(memoryFSname, localFSname)     // This can be called by C/C++ code
+        {
+            var isSafari = false; // Not supported, navigator.userAgent access is being restricted
+            //var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            var data = FS.readFile(memoryFSname);
+            var blob;
+
+            if (isSafari) blob = new Blob([data.buffer], { type: "application/octet-stream" });
+            else blob = new Blob([data.buffer], { type: "application/octet-binary" });
+
+            // NOTE: SaveAsDialog is a browser setting. For example, in Google Chrome,
+            // in Settings/Advanced/Downloads section you have a setting:
+            // 'Ask where to save each file before downloading' - which you can set true/false.
+            // If you enable this setting it would always ask you and bring the SaveAsDialog
+            saveAs(blob, localFSname);
+        }
+    </script>
+    </head>
+    <body>
+        <canvas class=emscripten id=canvas oncontextmenu=event.preventDefault() tabindex=-1></canvas>
+        <p id="output" />
+        <script>
+            var Module = {
+                print: (function() {
+                    var element = document.getElementById('output');
+                    if (element) element.value = ''; // clear browser cache
+                    return function(text) {
+                        if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+                        console.log(text);
+                        if (element) {
+                          element.value += text + "\n";
+                          element.scrollTop = element.scrollHeight; // focus on bottom
+                        }
+                    };
+                })(),
+                canvas: (function() {
+                    var canvas = document.getElementById('canvas');
+                    return canvas;
+                })()
+            };
+        </script>
+
+    <script>
+	    function happyTime(){
+		    window.CrazyGames.SDK.game.happytime();
+	    }
+
+	    function storeData(data){
+		    localStorage.setItem("IRONTANKS_LEVEL",data);
+	    }
+
+	    function loadData(){
+		    return localStorage.getItem("IRONTANKS_LEVEL");
+	    }
+
+	    function startLoadingGame(){
+	  	window.CrazyGames.SDK.game.sdkGameLoadingStart();
+	    }
+
+	    function stopLoadingGame(){
+		window.CrazyGames.SDK.game.sdkGameLoadingStop();
+	    }
+
+	    function startGamePlay(){
+	    	window.CrazyGames.SDK.game.gameplayStart();	    
+	    }
+
+	    function stopGamePlay(){
+	    	window.CrazyGames.SDK.game.gameplayStop();	    
+	    }
+
+	    function displayAD(){
+		    var banner = document.getElementById("banner-container");
+		    banner.style.display = "block";
+		    var banner2 = document.getElementById("banner-container2");
+		    banner2.style.display = "block";
+		
+		    window.CrazyGames.SDK.banner.requestBanner({
+			    id: "banner-container2",
+			    width: 728,
+			    height: 90,
+		    });
+
+		    window.CrazyGames.SDK.banner.requestBanner({
+			    id: "banner-container",
+			    width: 300,
+			    height: 250,
+		    });
+	    }
+
+	    function clearAD(){
+		    var banner = document.getElementById("banner-container");
+		    banner.style.display = "none";
+		    var banner2 = document.getElementById("banner-container2");
+		    banner2.style.display = "none";
+		    
+		    window.CrazyGames.SDK.banner.clearAllBanners();
+	    }
+    </script>
+
+        <script async type="text/javascript" src="index.js"></script>
+    </body>
+</html>

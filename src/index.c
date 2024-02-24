@@ -24,14 +24,14 @@ enum GameState{
 	win,
 	controls
 };
-enum GameState gameState = menu;
+enum GameState gameState = menu; //menu
 
 
 int main() {
 	funcJS("startLoadingGame()");
 	InitWindow(1128, 615, "Iron Tanks");
 
-	DisableCursor();
+	EnableCursor();
 
 	gameInit();
 	SetTargetFPS(60);
@@ -40,6 +40,8 @@ int main() {
 	funcJS("stopLoadingGame()");
 	funcJS("stopGamePlay()");
 
+
+	//DisableCursor();
 	emscripten_set_main_loop(update, 0, 1);
 
 	CloseWindow();
@@ -50,7 +52,6 @@ int main() {
 void update(){
 	BeginDrawing();
 	ClearBackground(GRAY);
-
 	switch (gameState) {
 		case game:
 			gameUpdate();
@@ -71,6 +72,7 @@ void update(){
 			controlsUpdate();
 			break;
 	}
+
 	EndDrawing();
 }
 
@@ -105,11 +107,13 @@ void gameUpdate() {
 	bulletRender();
 	tankUpdate();
 	playerUpdate();
-	cameraMovement(&camera);
-	updateMouse(false);
 
 	//printf("fps: %d \n",GetFPS());
+
+	cameraMovement(&camera); //Last
 	EndMode2D();
+
+	updateMouse(false);
 
 	char level[80];
 	sprintf(level, "level: %d", currentLevel);

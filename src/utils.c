@@ -34,12 +34,13 @@ double toThera(double a){
 	return a * M_PI / 180.;
 }
 
-int mouseX;
-int mouseY;
-int lastMouseX;
-int lastMouseY;
-int mouseXOffset;
-int mouseYOffset;
+// INIT INT TO 0
+int mouseX = 0;
+int mouseY = 0;
+int lastMouseX = 0;
+int lastMouseY = 0;
+int mouseXOffset = 0;
+int mouseYOffset = 0;
 Texture2D cursor;
 
 // Y: 306 X: 564
@@ -48,55 +49,11 @@ void updateMouse(bool InMenu){
 		cursor = LoadTexture("/res/cursor.png");
 	}
 
-	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-		DisableCursor();
-	}
+	mouseX = GetMouseX();
+	mouseY = GetMouseY();
 
-	// if window already focused dont change mouse pos
-	
-	if (GetMouseY() != 307 && GetMouseX() != 564){
-		mouseX = GetMouseX() + camera.target.x + mouseXOffset;
-		mouseY = GetMouseY() + camera.target.y + mouseYOffset;
-		lastMouseX = GetMouseX();
-		lastMouseY = GetMouseY();
-	}else{
-		mouseX = lastMouseX + camera.target.x + mouseXOffset;
-		mouseY = lastMouseY + camera.target.y + mouseXOffset;
-	}
-
-	DrawTexture(cursor, mouseX - 20, mouseY - 20, WHITE);
-
-	if (!InMenu){
-		mouseXOffset = 0;
-		mouseYOffset = 0;
-		return;
-	}
-	
-	if (mouseX < 0)
-		mouseXOffset += 10;
-	
-	if (mouseX > 1128)
-		mouseXOffset -= 100;
-	
-	if (mouseY > 1128)
-		mouseYOffset -= 100;
-	
-	if(mouseY < 100)
-		mouseYOffset += 10;
+	//DrawTexture(cursor, mouseX, mouseY, WHITE);
 }
-/*
-bool checkAABBCol(int aX, int aY, int aWidth, int aHeight, int bX, int bY, int bWidth, int bHeight) {
-    // no overlap x-axis
-    if ((aX + aWidth) < bX || aX > (bX + bWidth))
-        return false;
-
-    // no overlap y-axis
-    if ((aY + aHeight) < bY || aY > (bY + bHeight))
-        return false;
-
-    return true;
-}
-*/
 
 EMSCRIPTEN_KEEPALIVE
 void funcJS(char * func){
