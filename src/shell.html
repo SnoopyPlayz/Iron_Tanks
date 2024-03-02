@@ -132,14 +132,14 @@
 	    function displayAD(){
 		    var banner = document.getElementById("banner-container");
 		    banner.style.display = "block";
-		    var banner2 = document.getElementById("banner-container2");
+		    /*var banner2 = document.getElementById("banner-container2");
 		    banner2.style.display = "block";
 		
 		    window.CrazyGames.SDK.banner.requestBanner({
 			    id: "banner-container2",
 			    width: 728,
 			    height: 90,
-		    });
+		    });*/
 
 		    window.CrazyGames.SDK.banner.requestBanner({
 			    id: "banner-container",
@@ -151,8 +151,8 @@
 	    function clearAD(){
 		    var banner = document.getElementById("banner-container");
 		    banner.style.display = "none";
-		    var banner2 = document.getElementById("banner-container2");
-		    banner2.style.display = "none";
+		    /*var banner2 = document.getElementById("banner-container2");
+		    banner2.style.display = "none";*/
 		    
 		    window.CrazyGames.SDK.banner.clearAllBanners();
 	    }
